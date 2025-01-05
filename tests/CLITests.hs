@@ -85,7 +85,7 @@ smpServerTest storeLog basicAuth = do
   Right ini <- readIniFile $ cfgPath <> "/smp-server.ini"
   lookupValue "STORE_LOG" "enable" ini `shouldBe` Right (if storeLog then "on" else "off")
   lookupValue "STORE_LOG" "log_stats" ini `shouldBe` Right "off"
-  lookupValue "TRANSPORT" "port" ini `shouldBe` Right "5223,443"
+  lookupValue "TRANSPORT" "port" ini `shouldBe` Right "5223"
   lookupValue "TRANSPORT" "websockets" ini `shouldBe` Right "off"
   lookupValue "AUTH" "new_queues" ini `shouldBe` Right "on"
   lookupValue "INACTIVE_CLIENTS" "disconnect" ini `shouldBe` Right "on"
