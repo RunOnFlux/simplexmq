@@ -2,8 +2,6 @@
 confd='/etc/opt/simplex'
 logd='/var/opt/simplex/'
 
-mkdir -p /srv/xftp
-
 HOSTINFO=$(curl -s http://fluxnode.service:16101/hostinfo)
 IP=$(echo "$HOSTINFO" | jq -r '.data.ip')
 ADDR=${IP}
