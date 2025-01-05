@@ -27,7 +27,7 @@ if [ ! -f "${confd}/smp-server.ini" ]; then
   esac
 
   # And init certificates and configs
-  smp-server init -y -l "$@"
+  smp-server init -y -l --disable-web "$@"
 fi
 
 # Backup store log just in case
