@@ -60,7 +60,7 @@ xftpServerCLI cfgPath logPath = do
   where
     iniFile = combine cfgPath "file-server.ini"
     serverVersion = "SimpleX XFTP server v" <> simplexMQVersion
-    defaultServerPort = "443"
+    defaultServerPort = "34443"
     executableName = "file-server"
     storeLogFilePath = combine logPath "file-server-store.log"
     initializeServer InitOptions {enableStoreLog, signAlgorithm, ip, fqdn, filesPath, fileSizeQuota} = do
