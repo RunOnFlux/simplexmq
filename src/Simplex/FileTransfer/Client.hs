@@ -117,7 +117,7 @@ getXFTPClient transportSession@(_, srv, _) config@XFTPClientConfig {clientALPN, 
   let tcConfig = transportClientConfig xftpNetworkConfig NRMBackground useHost False useALPN
       http2Config = xftpHTTP2Config tcConfig config
   clientVar <- newTVarIO Nothing
-  let usePort = if null port then "443" else port
+  let usePort = if null port then "34443" else port
       clientDisconnected = readTVarIO clientVar >>= mapM_ disconnected
   http2Client <- liftError' xftpClientError $ getVerifiedHTTP2Client socksCreds useHost usePort (Just keyHash) Nothing http2Config clientDisconnected
   let HTTP2Client {sessionId, sessionALPN} = http2Client

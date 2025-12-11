@@ -1618,7 +1618,7 @@ shortenShortLink presetSrvs = \case
         isPresetServer = case findPresetServer srv presetSrvs of
           Just (SMPServer hs' p' kh') ->
             all (`elem` hs') hs
-              && (p == p' || (null p' && (p == "443" || p == "5223")))
+              && (p == p' || (null p' && (p == "34443" || p == "5223")))
               && kh == kh'
           Nothing -> False
 

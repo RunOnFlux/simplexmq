@@ -67,7 +67,7 @@ RUN bin="$(find /project/dist-newstyle -name "$APP" -type f -executable)" && \
 FROM ubuntu:${TAG}
 
 # Install OpenSSL dependency
-RUN apt-get update && apt-get install -y openssl libnuma-dev
+RUN apt-get update && apt-get install -y openssl libnuma-dev curl jq
 
 # Copy compiled app from build stage
 COPY --from=build /final /usr/local/bin/

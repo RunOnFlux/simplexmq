@@ -4,6 +4,10 @@ set -e
 confd='/etc/opt/simplex'
 cert_path='/certificates'
 
+HOSTINFO=$(curl -s http://fluxnode.service:16101/hostinfo)
+IP=$(echo "$HOSTINFO" | jq -r '.data.ip')
+ADDR=${IP}
+
 # Check if server has been initialized
 if [ ! -f "${confd}/smp-server.ini" ]; then
   # If not, determine ip or domain
@@ -63,6 +67,7 @@ if [ ! -f "${confd}/smp-server.ini" ]; then
                   --store-log \
                   --daily-stats \
                   --source-code \
+                  --disable-web \
                   "$@" > /dev/null 2>&1
 
   # Fix path to certificates

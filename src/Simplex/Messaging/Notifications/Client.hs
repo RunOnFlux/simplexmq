@@ -25,7 +25,7 @@ type NtfClientError = ProtocolClientError ErrorType
 defaultNTFClientConfig :: ProtocolClientConfig NTFVersion
 defaultNTFClientConfig =
   (defaultClientConfig (Just alpnSupportedNTFHandshakes) False supportedClientNTFVRange)
-    {defaultTransport = ("443", transport @TLS)}
+    {defaultTransport = ("34443", transport @TLS)}
 {-# INLINE defaultNTFClientConfig #-}
 
 ntfRegisterToken :: NtfClient -> NetworkRequestMode -> C.APrivateAuthKey -> NewNtfEntity 'Token -> ExceptT NtfClientError IO (NtfTokenId, C.PublicKeyX25519)

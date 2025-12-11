@@ -119,9 +119,9 @@ iniFileContent cfgPath logPath opts host basicAuth controlPortPwds =
     <> ("host: " <> T.pack host <> "\n")
     <> ("port: " <> defaultServerPorts <> "\n")
     <> "log_tls_errors: off\n\n\
-        \# Use `websockets: 443` to run websockets server in addition to plain TLS.\n\
+        \# Use `websockets: 34443` to run websockets server in addition to plain TLS.\n\
         \# This option is deprecated and should be used for testing only.\n\
-        \# , port 443 should be specified in port above\n\
+        \# , port 34443 should be specified in port above\n\
         \websockets: off\n"
     <> (optDisabled controlPort <> "control_port: " <> tshow (fromMaybe defaultControlPort controlPort))
     <> "\n\n\
@@ -159,12 +159,12 @@ iniFileContent cfgPath logPath opts host basicAuth controlPortPwds =
         \# http: 8000\n\n\
         \# You can run an embedded TLS web server too if you provide port and cert and key files.\n\
         \# Not required for running relay on onion address.\n"
-    <> (webDisabled <> "https: 443\n")
+    <> (webDisabled <> "https: 34443\n")
     <> (webDisabled <> "cert: " <> T.pack httpsCertFile <> "\n")
     <> (webDisabled <> "key: " <> T.pack httpsKeyFile <> "\n")
   where
     InitOptions {enableStoreLog, dbOptions, socksProxy, ownDomains, controlPort, webStaticPath, disableWeb, logStats} = opts
-    defaultServerPorts = "5223,443"
+    defaultServerPorts = "5223,34443"
     defaultStaticPath = logPath </> "www"
     httpsCertFile = cfgPath </> "web.crt"
     httpsKeyFile = cfgPath </> "web.key"

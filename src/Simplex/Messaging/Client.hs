@@ -303,7 +303,7 @@ data NetworkConfig = NetworkConfig
     smpProxyMode :: SMPProxyMode,
     -- | Fallback to direct connection when destination SMP relay does not support SMP proxy protocol extensions
     smpProxyFallback :: SMPProxyFallback,
-    -- | use web port 443 for SMP protocol
+    -- | use web port 34443 for SMP protocol
     smpWebPortServers :: SMPWebPortServers,
     -- | timeout for the initial client TCP/TLS connection (microseconds)
     tcpConnectTimeout :: NetworkTimeout,
@@ -479,7 +479,7 @@ defaultClientConfig :: Maybe [ALPN] -> Bool -> VersionRange v -> ProtocolClientC
 defaultClientConfig clientALPN useSNI serverVRange =
   ProtocolClientConfig
     { qSize = 64,
-      defaultTransport = ("443", transport @TLS),
+      defaultTransport = ("34443", transport @TLS),
       networkConfig = defaultNetworkConfig,
       clientALPN,
       serviceCredentials = Nothing,
@@ -609,7 +609,7 @@ getProtocolClient g nm transportSession@(_, srv, _) cfg@ProtocolClientConfig {qS
     useTransport :: (ServiceName, ATransport 'TClient)
     useTransport = case port srv of
       "" -> case protocolTypeI @(ProtoType msg) of
-        SPSMP | web -> ("443", transport @TLS)
+        SPSMP | web -> ("34443", transport @TLS)
         _ -> defaultTransport cfg
       p -> (p, transport @TLS)
 

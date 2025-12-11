@@ -408,10 +408,10 @@ printServerTransports protocol ts = do
     let descr = p <> " (" <> transportName t <> ")..."
     putStrLn $ "Serving " <> protocol <> " protocol on port " <> descr
     when addHTTP $ putStrLn $ "Serving static site on port " <> descr
-  unless (any (\(p, _, _) -> p == "443") ts) $
+  unless (any (\(p, _, _) -> p == "34443") ts) $
     putStrLn
-      "\nWARNING: the clients will use port 443 by default soon.\n\
-      \Set `port` in smp-server.ini section [TRANSPORT] to `5223,443`\n"
+      "\nWARNING: the clients will use port 34443 by default soon.\n\
+      \Set `port` in smp-server.ini section [TRANSPORT] to `5223,34443`\n"
 
 printSMPServerConfig :: [(ServiceName, ASrvTransport, AddHTTP)] -> ServerStoreCfg s -> IO ()
 printSMPServerConfig transports = \case

@@ -199,7 +199,7 @@ defaultAPNSPushClientConfig =
       paddedNtfLength = 3072,
       appName = "chat.simplex.app",
       appTeamId = "5NN7GUYB6T",
-      apnsPort = "443",
+      apnsPort = "34443",
       http2cfg = defaultHTTP2ClientConfig {bufferSize = 16384},
       caStoreFile = "/etc/ssl/cert.pem"
     }

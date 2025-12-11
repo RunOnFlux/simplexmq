@@ -102,7 +102,7 @@ smpServerTest storeLog basicAuth = do
   Right ini <- readIniFile $ cfgPath <> "/smp-server.ini"
   lookupValue "STORE_LOG" "enable" ini `shouldBe` Right (if storeLog then "on" else "off")
   lookupValue "STORE_LOG" "log_stats" ini `shouldBe` Right "off"
-  lookupValue "TRANSPORT" "port" ini `shouldBe` Right "5223,443"
+  lookupValue "TRANSPORT" "port" ini `shouldBe` Right "5223,34443"
   lookupValue "TRANSPORT" "websockets" ini `shouldBe` Right "off"
   lookupValue "AUTH" "new_queues" ini `shouldBe` Right "on"
   lookupValue "INACTIVE_CLIENTS" "disconnect" ini `shouldBe` Right "on"
@@ -111,7 +111,7 @@ smpServerTest storeLog basicAuth = do
   r <- lines <$> capture_ (withArgs ["start"] $ (100000 `timeout` smpServerCLI cfgPath logPath) `catchAll_` pure (Just ()))
   r `shouldContain` ["SMP server v" <> simplexmqVersionCommit]
   r `shouldContain` (if storeLog then ["Store log: " <> logPath <> "/smp-server-store.log"] else ["Store log disabled."])
-  r `shouldContain` ["Serving SMP protocol on port 5223 (TLS)...", "Serving SMP protocol on port 443 (TLS)...", "Serving static site on port 443 (TLS)..."]
+  r `shouldContain` ["Serving SMP protocol on port 5223 (TLS)...", "Serving SMP protocol on port 34443 (TLS)...", "Serving static site on port 34443 (TLS)..."]
   r `shouldContain` ["expiring clients inactive for 21600 seconds every 3600 seconds"]
   r `shouldContain` (if basicAuth then ["creating new queues requires password"] else ["creating new queues allowed"])
   -- cert
@@ -213,13 +213,13 @@ ntfServerTest storeLog = do
   Right ini <- readIniFile $ ntfCfgPath <> "/ntf-server.ini"
   lookupValue "STORE_LOG" "enable" ini `shouldBe` Right (if storeLog then "on" else "off")
   lookupValue "STORE_LOG" "log_stats" ini `shouldBe` Right "off"
-  lookupValue "TRANSPORT" "port" ini `shouldBe` Right "443"
+  lookupValue "TRANSPORT" "port" ini `shouldBe` Right "34443"
   lookupValue "TRANSPORT" "websockets" ini `shouldBe` Right "off"
   doesFileExist (ntfCfgPath <> "/ca.key") `shouldReturn` True
   r <- lines <$> capture_ (withArgs ["start"] $ (100000 `timeout` ntfServerCLI ntfCfgPath ntfLogPath) `catchAll_` pure (Just ()))
   r `shouldContain` ["SMP notifications server v" <> simplexmqVersionCommit]
   r `shouldContain` (if storeLog then ["Store log: " <> ntfLogPath <> "/ntf-server-store.log"] else ["Store log disabled."])
-  r `shouldContain` ["Serving NTF protocol on port 443 (TLS)..."]
+  r `shouldContain` ["Serving NTF protocol on port 34443 (TLS)..."]
   capture_ (withStdin "Y" . withArgs ["delete"] $ ntfServerCLI ntfCfgPath ntfLogPath)
     >>= (`shouldSatisfy` ("WARNING: deleting the server will make all queues inaccessible" `isPrefixOf`))
   doesFileExist (cfgPath <> "/ca.key") `shouldReturn` False
@@ -232,12 +232,12 @@ xftpServerTest storeLog = do
   Right ini <- readIniFile $ fileCfgPath <> "/file-server.ini"
   lookupValue "STORE_LOG" "enable" ini `shouldBe` Right (if storeLog then "on" else "off")
   lookupValue "STORE_LOG" "log_stats" ini `shouldBe` Right "off"
-  lookupValue "TRANSPORT" "port" ini `shouldBe` Right "443"
+  lookupValue "TRANSPORT" "port" ini `shouldBe` Right "34443"
   doesFileExist (fileCfgPath <> "/ca.key") `shouldReturn` True
   r <- lines <$> capture_ (withArgs ["start"] $ (100000 `timeout` xftpServerCLI fileCfgPath fileLogPath) `catchAll_` pure (Just ()))
   r `shouldContain` ["SimpleX XFTP server v" <> simplexmqVersionCommit]
   r `shouldContain` (if storeLog then ["Store log: " <> fileLogPath <> "/file-server-store.log"] else ["Store log disabled."])
-  r `shouldContain` ["Listening on port 443..."]
+  r `shouldContain` ["Listening on port 34443..."]
   capture_ (withStdin "Y" . withArgs ["delete"] $ xftpServerCLI fileCfgPath fileLogPath)
     >>= (`shouldSatisfy` ("WARNING: deleting the server will make all queues inaccessible" `isPrefixOf`))
   doesFileExist (cfgPath <> "/ca.key") `shouldReturn` False

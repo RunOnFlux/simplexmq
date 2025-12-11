@@ -11,7 +11,7 @@ services:
             redir https://{$$ADDR}{uri} permanent
         }
 
-        {$$ADDR}:8443 {
+        {$$ADDR}:834443 {
             tls {
                 key_type rsa4096
             }
@@ -58,7 +58,7 @@ services:
         volume:
           subpath: "caddy/certificates/${CERT_PATH:-acme-v02.api.letsencrypt.org-directory}/${ADDR}"
     ports:
-      - 443:443
+      - 34443:34443
       - 5223:5223
     restart: unless-stopped
 

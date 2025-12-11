@@ -61,7 +61,7 @@ xftpServerCLI cfgPath logPath = do
   where
     iniFile = combine cfgPath "file-server.ini"
     serverVersion = "SimpleX XFTP server v" <> simplexmqVersionCommit
-    defaultServerPort = "443"
+    defaultServerPort = "34443"
     executableName = "file-server"
     storeLogFilePath = combine logPath "file-server-store.log"
     initializeServer InitOptions {enableStoreLog, signAlgorithm, ip, fqdn, filesPath, fileSizeQuota} = do
@@ -130,7 +130,7 @@ xftpServerCLI cfgPath logPath = do
       fp <- checkSavedFingerprint cfgPath defaultX509Config
       let host = fromRight "<hostnames>" $ T.unpack <$> lookupValue "TRANSPORT" "host" ini
           port = T.unpack $ strictIni "TRANSPORT" "port" ini
-          srv = ProtoServerWithAuth (XFTPServer [THDomainName host] (if port == "443" then "" else port) (C.KeyHash fp)) Nothing
+          srv = ProtoServerWithAuth (XFTPServer [THDomainName host] (if port == "34443" then "" else port) (C.KeyHash fp)) Nothing
       printServiceInfo serverVersion srv
       printXFTPConfig serverConfig
       runXFTPServer serverConfig

@@ -138,7 +138,7 @@ ntfServerCLI cfgPath logPath =
         Nothing -> putStrLn "Store log disabled, see `[STORE_LOG] enable`" >> exitFailure
     iniFile = combine cfgPath "ntf-server.ini"
     serverVersion = "SMP notifications server v" <> simplexmqVersionCommit
-    defaultServerPort = "443"
+    defaultServerPort = "34443"
     executableName = "ntf-server"
     storeLogFilePath = combine logPath "ntf-server-store.log"
     initializeServer InitOptions {enableStoreLog, dbOptions, signAlgorithm, ip, fqdn} = do
@@ -181,7 +181,7 @@ ntfServerCLI cfgPath logPath =
             <> ("host: " <> T.pack host <> "\n")
             <> ("port: " <> T.pack defaultServerPort <> "\n")
             <> "log_tls_errors: off\n\n\
-               \# Use `websockets: 443` to run websockets server in addition to plain TLS.\n\
+               \# Use `websockets: 34443` to run websockets server in addition to plain TLS.\n\
                \websockets: off\n\n\
                \# control_port: 5227\n\
                \\n\
@@ -215,7 +215,7 @@ ntfServerCLI cfgPath logPath =
       let host = either (const "<hostnames>") T.unpack $ lookupValue "TRANSPORT" "host" ini
           port = T.unpack $ strictIni "TRANSPORT" "port" ini
           cfg@NtfServerConfig {transports} = serverConfig
-          srv = ProtoServerWithAuth (NtfServer [THDomainName host] (if port == "443" then "" else port) (C.KeyHash fp)) Nothing
+          srv = ProtoServerWithAuth (NtfServer [THDomainName host] (if port == "34443" then "" else port) (C.KeyHash fp)) Nothing
       printServiceInfo serverVersion srv
       printNtfServerConfig transports dbStoreConfig
       runNtfServer cfg

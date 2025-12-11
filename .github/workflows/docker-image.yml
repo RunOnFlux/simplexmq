@@ -14,9 +14,9 @@ jobs:
       matrix:
         include:
           - app: smp-server
-            app_port: "443 5223"
+            app_port: "34443 5223"
           - app: xftp-server
-            app_port: 443
+            app_port: 34443
     steps:
       - name: Clone project
         uses: actions/checkout@v4

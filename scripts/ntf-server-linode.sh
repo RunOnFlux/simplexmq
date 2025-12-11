@@ -110,7 +110,7 @@ SimpleX notifications server address: ntf://\$fingerprint@\$server_address
 Check server status with: systemctl status ntf-server
 
 To keep this server secure, the UFW firewall is enabled.
-All ports are BLOCKED except 22 (SSH), 443 (HTTPS), 5223 (notifications server).
+All ports are BLOCKED except 22 (SSH), 34443 (HTTPS), 5223 (notifications server).
 
 ********************************************************************************
 To stop seeing this message delete line - bash /opt/simplex-notifications/on_login.sh - from /root/.bashrc

@@ -135,7 +135,7 @@ On Linux, you can deploy smp and xftp server using Docker. This will download im
      docker run -d \
          -e "ADDR=your_ip_or_domain" \
          -e "QUOTA=maximum_storage" \
-         -p 443:443 \
+         -p 34443:34443 \
          -v $HOME/simplex/xftp/config:/etc/opt/simplex-xftp:z \
          -v $HOME/simplex/xftp/logs:/var/opt/simplex-xftp:z \
          -v $HOME/simplex/xftp/files:/srv/xftp:z \
@@ -175,7 +175,7 @@ On Linux, you can build smp server using Docker.
    cd simplexmq
    git checkout stable
    DOCKER_BUILDKIT=1 docker build -t local/smp-server --build-arg APP="smp-server" --build-arg APP_PORT="5223" . # For xmp-server
-   DOCKER_BUILDKIT=1 docker build -t local/xftp-server --build-arg APP="xftp-server" --build-arg APP_PORT="443" . # For xftp-server
+   DOCKER_BUILDKIT=1 docker build -t local/xftp-server --build-arg APP="xftp-server" --build-arg APP_PORT="34443" . # For xftp-server
    ```
 
 2. Create directories for persistent Docker configuration:
@@ -206,7 +206,7 @@ On Linux, you can build smp server using Docker.
      docker run -d \
          -e "ADDR=your_ip_or_domain" \
          -e "QUOTA=maximum_storage" \
-         -p 443:443 \
+         -p 34443:34443 \
          -v $HOME/simplex/xftp/config:/etc/opt/simplex-xftp:z \
          -v $HOME/simplex/xftp/logs:/var/opt/simplex-xftp:z \
          -v $HOME/simplex/xftp/files:/srv/xftp:z \
