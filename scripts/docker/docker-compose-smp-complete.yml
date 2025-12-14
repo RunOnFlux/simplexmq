@@ -11,7 +11,7 @@ services:
             redir https://{$$ADDR}{uri} permanent
         }
 
-        {$$ADDR}:834443 {
+        {$$ADDR}:8443 {
             tls {
                 key_type rsa4096
             }
